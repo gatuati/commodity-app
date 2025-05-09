@@ -1,20 +1,19 @@
 <?php
-$host = 'localhost';
-$dbname = 'commodity_management_tool';
+$host = 'mysql.railway.internal';
+$port = 3306;
+$dbname = 'railway';
 $db_username = 'root';
-$db_password = '';
+$db_password = 'kIxyndwVhGhZthOsUfTgEXMVXjwFbRNt';
 
-// Enable error reporting
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 try {
-    $conn = new mysqli($host, $db_username, $db_password, $dbname);
+    $conn = new mysqli($host, $db_username, $db_password, $dbname, $port);
     
-    // Set charset to prevent encoding issues
     $conn->set_charset("utf8mb4");
-    
-    // Verify tables exist (for debugging)
-    $required_tables = ['users',  'facilities', 'activity_log'];
+
+    // Verify required tables exist
+    $required_tables = ['users', 'facilities', 'activity_log'];
     foreach ($required_tables as $table) {
         $result = $conn->query("SHOW TABLES LIKE '$table'");
         if ($result->num_rows == 0) {
